@@ -1,0 +1,2 @@
+rootProject.name='Amplify Authentication'
+include ':app'
