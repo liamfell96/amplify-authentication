@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobile.client.Callback;
 import com.amazonaws.mobile.client.UserStateDetails;
+import com.amazonaws.mobile.client.UserStateListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +18,35 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //register app to listen for user authentication state
+
+        AWSMobileClient.getInstance().addUserStateListener(
+                new UserStateListener() {
+                    @Override
+                    public void onUserStateChanged(UserStateDetails userStateDetails) {
+                        switch (userStateDetails.getUserState())
+                        {
+                            //case the user pressed the signout button
+                            case SIGNED_OUT:
+                                Log.i("AuthQuickStart", "user is signed out");
+                                break;
+
+                            //case user session expired
+                            case SIGNED_OUT_USER_POOLS_TOKENS_INVALID:
+                                Log.i("AuthQuickStart", "need to login again.");
+
+                                //Logic here for signing the user back in...
+                                break;
+
+                             //default case
+                            default:
+                                Log.i("AuthQuickStart", "unsupported");
+                        }
+
+                    }
+                }
+        );
 
         AWSMobileClient.getInstance().initialize(getApplicationContext(), new Callback<UserStateDetails>() {
             @Override
