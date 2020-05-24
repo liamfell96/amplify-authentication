@@ -21,7 +21,7 @@
 
 
     <!-- Main activity strings -->
-    <string name = "string_name">User login status is</string>
+    <string name="string_name">User login status is</string>
 
 
     <!-- Strings used in user form -->

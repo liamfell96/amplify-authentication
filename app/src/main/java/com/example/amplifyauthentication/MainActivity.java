@@ -19,8 +19,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //register app to listen for user authentication state
 
+
+        //register app to listen for user authentication state
         AWSMobileClient.getInstance().addUserStateListener(
                 new UserStateListener() {
                     @Override
@@ -48,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
+
+        //find current user authentication state and set the text view to that state
         AWSMobileClient.getInstance().initialize(getApplicationContext(), new Callback<UserStateDetails>() {
             @Override
             public void onResult(UserStateDetails userStateDetails) {
