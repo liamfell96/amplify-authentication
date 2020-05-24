@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "amplifyauthenticatio06fcaf1a_identitypool_06fcaf1a",
+    "identityPoolName": "amplifyauthenticatiofc06cc73_identitypool_fc06cc73",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "amplif06fcaf1a",
-    "userPoolName": "amplifyauthenticatio06fcaf1a_userpool_06fcaf1a",
+    "resourceNameTruncated": "ampliffc06cc73",
+    "userPoolName": "amplifyauthenticatiofc06cc73_userpool_fc06cc73",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,10 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "amplif06fcaf1a_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "ampliffc06cc73_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "06fcaf1a",
-    "resourceName": "amplifyauthenticatio06fcaf1a",
+    "sharedId": "fc06cc73",
+    "resourceName": "amplifyauthenticatiofc06cc73",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -49,6 +49,11 @@
     "usernameAttributes": [
         "email"
     ],
+    "triggers": "{}",
     "userPoolGroupList": [],
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "permissions": [],
     "dependsOn": []
 }

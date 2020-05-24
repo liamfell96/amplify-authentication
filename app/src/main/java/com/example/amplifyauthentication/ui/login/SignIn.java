@@ -26,7 +26,7 @@ import com.example.amplifyauthentication.R;
 import com.example.amplifyauthentication.ui.login.LoginViewModel;
 import com.example.amplifyauthentication.ui.login.LoginViewModelFactory;
 
-public class LoginActivity extends AppCompatActivity {
+class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
 

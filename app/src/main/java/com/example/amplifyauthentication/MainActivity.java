@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobile.client.Callback;
@@ -20,14 +21,38 @@ public class MainActivity extends AppCompatActivity {
         AWSMobileClient.getInstance().initialize(getApplicationContext(), new Callback<UserStateDetails>() {
             @Override
             public void onResult(UserStateDetails userStateDetails) {
-                Log.i("INIT", "onResult: " + userStateDetails.getUserState());
+                switch (userStateDetails.getUserState()) {
+                    case SIGNED_IN:
 
+                        //set status text view to logged in using UI thread
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                TextView textView = (TextView) findViewById(R.id.user_status);
+                                textView.setText("Logged IN");
+                            }
+                        });
+                        break;
+                    case SIGNED_OUT:
+
+                        //set status text view to logged out using UI thread
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                TextView textView = (TextView) findViewById(R.id.user_status);
+                                textView.setText("Logged OUT");
+                            }
+                        });
+                        break;
+                    default:
+                        AWSMobileClient.getInstance().signOut();
+                        break;
+                }
             }
 
             @Override
             public void onError(Exception e) {
-                Log.e("INIT", "Initialization error.", e);
-
+                Log.e("INIT", e.toString());
             }
         });
     }
