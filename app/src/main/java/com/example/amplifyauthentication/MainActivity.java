@@ -23,9 +23,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
         //set member variables for buttons
         Button mSignInButton;
         Button mSignUpButton;
@@ -55,8 +52,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //logic for SignOut button
+        mSignOutButton.setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View v){
+               Log.v("SignOut Button","Signout button clicked");
 
+               AWSMobileClient.getInstance().signOut();
 
+            }
+        });
 
 
         //register app to listen for user authentication state
@@ -68,8 +73,20 @@ public class MainActivity extends AppCompatActivity {
                         {
                             //case the user pressed the signout button
                             case SIGNED_OUT:
+
                                 Log.i("AuthQuickStart", "user is signed out");
+                                //set status text view to logged out using UI thread
+                                runOnUiThread(new Runnable() {
+                                                  @Override
+                                                  public void run() {
+                                                      TextView textView = (TextView) findViewById(R.id.user_status);
+                                                      textView.setText("Logged OUT");
+
+                                                  }
+                                              });
                                 break;
+
+
 
                             //case user session expired
                             case SIGNED_OUT_USER_POOLS_TOKENS_INVALID:
@@ -81,6 +98,14 @@ public class MainActivity extends AppCompatActivity {
                              //default case
                             default:
                                 Log.i("AuthQuickStart", "unsupported");
+                                //set status text view to logged out using UI thread
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        TextView textView = (TextView) findViewById(R.id.user_status);
+                                        textView.setText("Logged OUT");
+                                    }
+                                });
                         }
 
                     }
@@ -96,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
             public void onResult(UserStateDetails userStateDetails) {
                 switch (userStateDetails.getUserState()) {
                     case SIGNED_IN:
-
                         //set status text view to logged in using UI thread
                         runOnUiThread(new Runnable() {
                             @Override
