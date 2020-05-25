@@ -3,8 +3,12 @@ package com.example.amplifyauthentication;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.amazonaws.mobile.client.AWSMobileClient;
@@ -18,6 +22,40 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
+        //set member variables for buttons
+        Button mSignInButton;
+        Button mSignUpButton;
+        Button mSignOutButton;
+
+        //find and assign buttons to member variables
+        mSignInButton = findViewById(R.id.sign_in);
+        mSignUpButton = findViewById(R.id.sign_up);
+        mSignOutButton = findViewById(R.id.sign_out);
+
+
+        //set on click lister for sign in button
+
+        Log.i("Listener", "Set up on click listener");
+        mSignInButton.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                //log click
+                Log.i("Clicked button", "Clicked sign in button");
+
+                //build intent to go to sign in activity
+                Intent intent = new Intent(v.getContext(),SignIn.class);
+                startActivity(intent);
+
+            }
+        });
+
+
 
 
 
@@ -47,10 +85,12 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 }
+
         );
 
 
         //find current user authentication state and set the text view to that state
+        //TO-DO: see if this can be removed and integratated into the above
         AWSMobileClient.getInstance().initialize(getApplicationContext(), new Callback<UserStateDetails>() {
             @Override
             public void onResult(UserStateDetails userStateDetails) {

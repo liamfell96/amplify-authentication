@@ -28,39 +28,39 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/sign_in"
         android:layout_width="97dp"
         android:layout_height="43dp"
         android:layout_gravity="start"
-        android:enabled="false"
+
         android:text="Sign In"
-        app:layout_constraintEnd_toStartOf="@+id/register"
+        app:layout_constraintEnd_toStartOf="@+id/sign_up"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.5"/>
 
     <Button
-        android:id="@+id/register"
+        android:id="@+id/sign_up"
         android:layout_width="97dp"
         android:layout_height="43dp"
         android:layout_gravity="start"
-        android:enabled="false"
+
         android:text="Sign Up"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/logout"
-        app:layout_constraintStart_toEndOf="@+id/login"
+        app:layout_constraintEnd_toStartOf="@+id/sign_out"
+        app:layout_constraintStart_toEndOf="@+id/sign_in"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
-        android:id="@+id/logout"
+        android:id="@+id/sign_out"
         android:layout_width="97dp"
         android:layout_height="43dp"
         android:layout_gravity="start"
-        android:enabled="false"
+
         android:text="Sign Out"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/register"
+        app:layout_constraintStart_toEndOf="@+id/sign_up"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.5"/>
