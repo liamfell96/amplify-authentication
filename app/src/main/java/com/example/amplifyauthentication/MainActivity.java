@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobile.client.Callback;
+import com.amazonaws.mobile.client.UserState;
 import com.amazonaws.mobile.client.UserStateDetails;
 import com.amazonaws.mobile.client.UserStateListener;
 
@@ -33,9 +34,11 @@ public class MainActivity extends AppCompatActivity {
         mSignUpButton = findViewById(R.id.sign_up);
         mSignOutButton = findViewById(R.id.sign_out);
 
+        //set initial status of user
+        setInitialStatus();
+
 
         //set on click lister for sign in button
-
         Log.i("Listener", "Set up on click listener");
         mSignInButton.setOnClickListener(new OnClickListener() {
 
@@ -57,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                Log.v("SignOut Button","Signout button clicked");
-
                AWSMobileClient.getInstance().signOut();
 
             }
@@ -69,30 +71,21 @@ public class MainActivity extends AppCompatActivity {
                 new UserStateListener() {
                     @Override
                     public void onUserStateChanged(UserStateDetails userStateDetails) {
-                        switch (userStateDetails.getUserState())
+                        UserState userState = userStateDetails.getUserState();
+
+                        switch (userState)
                         {
                             //case the user pressed the signout button
                             case SIGNED_OUT:
-
                                 Log.i("AuthQuickStart", "user is signed out");
-                                //set status text view to logged out using UI thread
-                                runOnUiThread(new Runnable() {
-                                                  @Override
-                                                  public void run() {
-                                                      TextView textView = (TextView) findViewById(R.id.user_status);
-                                                      textView.setText("Logged OUT");
-
-                                                  }
-                                              });
+                                setSignStatus(userState);
                                 break;
-
-
 
                             //case user session expired
                             case SIGNED_OUT_USER_POOLS_TOKENS_INVALID:
                                 Log.i("AuthQuickStart", "need to login again.");
-
                                 //Logic here for signing the user back in...
+                                setSignStatus(userState);
                                 break;
 
                              //default case
@@ -107,40 +100,58 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 });
                         }
-
                     }
                 }
-
         );
+    }
 
 
-        //find current user authentication state and set the text view to that state
-        //TO-DO: see if this can be removed and integratated into the above
+    //conv function to update user authentication status
+    private void setSignStatus(UserState userState){
+        //set status text view to logged out using UI thread
+        switch(userState)
+        {
+
+            case SIGNED_OUT:
+            case SIGNED_OUT_USER_POOLS_TOKENS_INVALID:
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        TextView textView = findViewById(R.id.user_status);
+                        textView.setText("Logged OUT");
+                    }
+                });
+                break;
+
+                case SIGNED_IN:
+                //set status text view to logged in using UI thread
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        TextView textView = findViewById(R.id.user_status);
+                        textView.setText("Logged IN");
+                    }
+                });
+                break;
+        }
+    }
+
+    //conv function to set initial status
+    public void setInitialStatus(){
+
+        //set initial state status
         AWSMobileClient.getInstance().initialize(getApplicationContext(), new Callback<UserStateDetails>() {
             @Override
             public void onResult(UserStateDetails userStateDetails) {
-                switch (userStateDetails.getUserState()) {
-                    case SIGNED_IN:
-                        //set status text view to logged in using UI thread
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                TextView textView = (TextView) findViewById(R.id.user_status);
-                                textView.setText("Logged IN");
-                            }
-                        });
-                        break;
-                    case SIGNED_OUT:
+                UserState userState = userStateDetails.getUserState();
 
-                        //set status text view to logged out using UI thread
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                TextView textView = (TextView) findViewById(R.id.user_status);
-                                textView.setText("Logged OUT");
-                            }
-                        });
+                switch (userState) {
+                    //call setSignInStatus convienience function
+                    case SIGNED_IN:
+                    case SIGNED_OUT:
+                        setSignStatus(userState);
                         break;
+                    //if in another state not signed in or out sign user out
                     default:
                         AWSMobileClient.getInstance().signOut();
                         break;
@@ -152,5 +163,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("INIT", e.toString());
             }
         });
+
     }
 }
