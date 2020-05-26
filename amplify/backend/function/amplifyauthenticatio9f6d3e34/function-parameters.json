@@ -1,0 +1,12 @@
+{
+    "permissions": {
+        "auth": {
+            "amplifyauthenticatioe4a5ce12": [
+                "create",
+                "read",
+                "update",
+                "delete"
+            ]
+        }
+    }
+}

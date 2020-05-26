@@ -1,19 +1,19 @@
 {
     "dev": {
         "awscloudformation": {
-            "AuthRoleName": "amplify-amplifyauthenticatio-dev-120248-authRole",
-            "UnauthRoleArn": "arn:aws:iam::246201410242:role/amplify-amplifyauthenticatio-dev-120248-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::246201410242:role/amplify-amplifyauthenticatio-dev-120248-authRole",
+            "AuthRoleName": "amplify-amplifyauthenticatio-dev-211833-authRole",
+            "UnauthRoleArn": "arn:aws:iam::246201410242:role/amplify-amplifyauthenticatio-dev-211833-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::246201410242:role/amplify-amplifyauthenticatio-dev-211833-authRole",
             "Region": "eu-west-2",
-            "DeploymentBucketName": "amplify-amplifyauthenticatio-dev-120248-deployment",
-            "UnauthRoleName": "amplify-amplifyauthenticatio-dev-120248-unauthRole",
-            "StackName": "amplify-amplifyauthenticatio-dev-120248",
-            "StackId": "arn:aws:cloudformation:eu-west-2:246201410242:stack/amplify-amplifyauthenticatio-dev-120248/1d7468a0-9dae-11ea-8e21-02c134fada26",
-            "AmplifyAppId": "d3asqaipqushze"
+            "DeploymentBucketName": "amplify-amplifyauthenticatio-dev-211833-deployment",
+            "UnauthRoleName": "amplify-amplifyauthenticatio-dev-211833-unauthRole",
+            "StackName": "amplify-amplifyauthenticatio-dev-211833",
+            "StackId": "arn:aws:cloudformation:eu-west-2:246201410242:stack/amplify-amplifyauthenticatio-dev-211833/12863860-9f8e-11ea-a885-021ebf3a767c",
+            "AmplifyAppId": "dldniubhhr06a"
         },
         "categories": {
             "auth": {
-                "amplifyauthenticatiofc06cc73": {}
+                "amplifyauthenticatioe4a5ce12": {}
             }
         }
     }

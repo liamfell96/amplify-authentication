@@ -1,9 +1,42 @@
 {
 	"auth": {
-		"amplifyauthenticatiofc06cc73": {
+		"amplifyauthenticatioe4a5ce12": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
-			"dependsOn": []
+			"dependsOn": [],
+			"customAuth": false
+		}
+	},
+	"function": {
+		"amplifyauthenticatio9f6d3e34": {
+			"build": true,
+			"providerPlugin": "awscloudformation",
+			"service": "Lambda",
+			"dependsOn": [
+				{
+					"category": "auth",
+					"resourceName": "amplifyauthenticatioe4a5ce12",
+					"attributes": [
+						"UserPoolId"
+					]
+				}
+			]
+		}
+	},
+	"api": {
+		"api40d4b2c9": {
+			"service": "API Gateway",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "amplifyauthenticatio9f6d3e34",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
+				}
+			]
 		}
 	}
 }
